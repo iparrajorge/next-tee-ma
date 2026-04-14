@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 import os
+from geopy.geocoders import Nominatim
 
 # Define the logo filename once so we can use it in multiple places
 LOGO_FILENAME = "logo.png"
@@ -54,14 +55,43 @@ hole_choice = st.sidebar.radio("Course Size", [18, 9], index=0, format_func=lamb
 explore_choice = st.sidebar.radio("Course History", ["All", "Remove frequent", "New"], index=0)
 
 # B. Location Inputs
-user_lat = st.sidebar.number_input("Your Latitude", value=42.3601, format="%.4f")
-user_lon = st.sidebar.number_input("Your Longitude", value=-71.0589, format="%.4f")
+@st.cache_data
+def get_coordinates(address_string):
+    """
+    Caches the geocoding result so we don't spam the API 
+    every time a slider is moved.
+    """
+    geolocator = Nominatim(user_agent="nexttee_ma_app")
+    try:
+        # Adding 'Massachusetts' ensures a local search
+        location = geolocator.geocode(address_string + ", Massachusetts")
+        if location:
+            return location.latitude, location.longitude, location.address
+    except:
+        return None, None, None
+    return None, None, None
+
+st.sidebar.subheader("Your Location")
+address_input = st.sidebar.text_input(
+    "Enter City, Zip, or Address", 
+    value="Boston City Hall"
+)
+
+# Set defaults
+user_lat, user_lon = 42.3601, -71.0589 
+
+if address_input:
+    lat, lon, full_name = get_coordinates(address_input)
+    if lat:
+        user_lat, user_lon = lat, lon
+        st.sidebar.success(f"📍 {full_name.split(',')[0]}")
+    else:
+        st.sidebar.error("Location not found. Using Boston City Hall.")
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Priority Balance")
 st.sidebar.write("Adjust how much you care about each factor:")
 
-# These act as "Relative Weights"
 imp_price = st.sidebar.slider("Price Sensitivity", 0, 10, 5)
 imp_rank = st.sidebar.slider("Course Prestige", 0, 10, 5)
 imp_dist = st.sidebar.slider("Proximity/Distance", 0, 10, 5)
