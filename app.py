@@ -55,20 +55,27 @@ hole_choice = st.sidebar.radio("Course Size", [18, 9], index=0, format_func=lamb
 explore_choice = st.sidebar.radio("Course History", ["All", "Remove frequent", "New"], index=0)
 
 # B. Location Inputs
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def get_coordinates(address_string):
     """
-    Caches the geocoding result so we don't spam the API 
-    every time a slider is moved.
+    Caches the geocoding result so we don't spam the API.
+    Increased timeout to prevent silent failures.
     """
-    geolocator = Nominatim(user_agent="nexttee_ma_app")
+    # Make sure this string is unique to you! 
+    geolocator = Nominatim(user_agent="nexttee_ma_golf_app_v1") 
+    
     try:
-        # Adding 'Massachusetts' ensures a local search
-        location = geolocator.geocode(address_string + ", Massachusetts")
+        # THE FIX: Added timeout=10. This gives the free server time to think.
+        location = geolocator.geocode(address_string + ", Massachusetts", timeout=10)
+        
         if location:
             return location.latitude, location.longitude, location.address
-    except:
+            
+    except Exception as e:
+        # This will print the exact error in your VS Code/Terminal console!
+        print(f"Geocoding Error: {e}") 
         return None, None, None
+        
     return None, None, None
 
 st.sidebar.subheader("Your Location")
