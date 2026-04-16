@@ -151,7 +151,7 @@ def calculate_scores(data):
     )
     
     # C. Normalize Rank (Exponential Decay)
-    k = 0.05
+    k = 0.01
     raw_rank_score = np.exp(-k * (data['BTP Ranking'] - 1))
     data['rank_score'] = (raw_rank_score - raw_rank_score.min()) / (raw_rank_score.max() - raw_rank_score.min() + 1e-6)
     
@@ -185,27 +185,38 @@ with tab1:
 with tab2:
     st.subheader(f"Top Recommended {hole_choice}-Hole Courses")
     if not results.empty:
-        map_df = results.copy().rename(columns={'Location X': 'lat', 'Location Y': 'lon'}).reset_index(drop=True)
-        map_df['map_size'] = 50
-        map_df.iloc[:5, map_df.columns.get_loc('map_size')] = 200
-        
-        dark_orange, dark_blue = [180, 60, 0, 230], [30, 70, 140, 180]
-        map_df['map_color'] = pd.Series([dark_blue] * len(map_df))
-        map_df.iloc[:5, map_df.columns.get_loc('map_color')] = pd.Series([dark_orange] * 5)
-        
-        map_df['map_label'] = ""
-        map_df.iloc[:5, map_df.columns.get_loc('map_label')] = map_df['Name'][:5]
+        # 1. Prepare User Location Data with dummy values to satisfy the tooltip
+        user_df = pd.DataFrame([{
+            'lat': user_lat, 
+            'lon': user_lon, 
+            'Name': '📍 Your Location',
+            'Price_Label': '-', 
+            'BTP Ranking': '-'
+        }])
 
+        # 2. Prepare Course Data
+        map_df = results.copy().rename(columns={'Location X': 'lat', 'Location Y': 'lon'}).reset_index(drop=True)
+        map_df['Price_Label'] = map_df['Price'].apply(lambda x: f"${int(x)}" if pd.notnull(x) else "N/A")
+        
+        top_5 = map_df.head(5).copy()
+        others = map_df.iloc[5:].copy()
+
+        # 3. Layers (Same as before)
+        other_layer = pdk.Layer("ScatterplotLayer", others, get_position=["lon", "lat"], 
+                                get_fill_color=[40, 40, 40, 200], get_radius=900, pickable=True)
+
+        top_layer = pdk.Layer("ScatterplotLayer", top_5, get_position=["lon", "lat"], 
+                              get_fill_color=[34, 139, 34, 255], get_radius=1500, pickable=True)
+
+        user_layer = pdk.Layer("ScatterplotLayer", user_df, get_position=["lon", "lat"], 
+                               get_fill_color=[200, 30, 30, 255], get_radius=1500, pickable=True)
+
+        # 4. Render
         st.pydeck_chart(pdk.Deck(
-            map_style="light", 
-            layers=[
-                pdk.Layer("ScatterplotLayer", map_df, get_position=["lon", "lat"], get_fill_color="map_color", get_radius="map_size", pickable=True),
-                pdk.Layer("TextLayer", map_df, get_position=["lon", "lat"], get_text="map_label", get_color="map_color", get_size=20, get_outline_color=[255,255,255,255], get_outline_width=2)
-            ],
-            initial_view_state=pdk.ViewState(latitude=map_df['lat'].mean(), longitude=map_df['lon'].mean(), zoom=8),
-            tooltip={"text": "{Name}\nPrice: ${Price:.0f}\nRank: {BTP Ranking}"}
+            map_style="light",
+            initial_view_state=pdk.ViewState(latitude=user_lat, longitude=user_lon, zoom=8),
+            layers=[other_layer, top_layer, user_layer],
+            tooltip={"text": "{Name}\nPrice: {Price_Label}\nRank: {BTP Ranking}"}
         ))
-    else:
-        st.write("No courses found.")
 
 st.caption("⚠️ Distances are calculated 'as the crow flies.' Cape Cod travel times may vary!")
