@@ -52,7 +52,12 @@ st.sidebar.header("User Preferences")
 
 # A. Course Size & History Filters
 hole_choice = st.sidebar.radio("Course Size", [18, 9], index=0, format_func=lambda x: f"{x} Holes")
-explore_choice = st.sidebar.radio("Course History", ["All", "Remove frequent", "New"], index=0)
+explore_choice = st.sidebar.radio(
+    "Course History", 
+    ["All", "New"], 
+    index=0,
+    help="'New' only shows courses you haven't played yet."
+)
 
 # B. Location Inputs
 @st.cache_data(show_spinner=False)
@@ -125,9 +130,9 @@ st.sidebar.markdown(f"""
 # 4. DATA FILTERING & CALCULATION
 df = df_raw[df_raw['Holes'] == hole_choice].copy()
 
-if explore_choice == "Remove frequent":
-    df = df[df['Played already'] < 2]
-elif explore_choice == "New":
+# New logic: Only filter if 'New' is selected. 
+# This treats any value > 0 (1, 2, etc.) as 'Played'.
+if explore_choice == "New":
     df = df[df['Played already'] == 0]
 
 def calculate_scores(data):
@@ -158,18 +163,26 @@ def calculate_scores(data):
     )
     
     # FINAL WEIGHTED SCORE
-    data['Final Score'] = (data['price_score'] * p_w) + \
+    data['Score'] = (data['price_score'] * p_w) + \
                           (data['rank_score'] * r_w) + \
                           (data['dist_score'] * d_w)
     
-    return data.sort_values(by='Final Score', ascending=False)
+    return data.sort_values(by='Score', ascending=False)
 
 results = calculate_scores(df)
 
 # 5. DISPLAY
-tab1, tab2 = st.tabs(["🗺️ Map View", "📊 Ranked Table"])
+tab1, tab2 = st.tabs(["📊 Ranked Table", "🗺️ Map View"])
 
 with tab1:
+    st.subheader("Ranked Results")
+    display_cols = ['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Played already', 'Holes']
+    st.dataframe(
+        results[display_cols].style.format({'Price': '{:.0f}', 'dist_miles': '{:.1f}', 'Score': '{:.2f}'}),
+        hide_index=True, use_container_width=True
+    )
+
+with tab2:
     st.subheader(f"Top Recommended {hole_choice}-Hole Courses")
     if not results.empty:
         map_df = results.copy().rename(columns={'Location X': 'lat', 'Location Y': 'lon'}).reset_index(drop=True)
@@ -194,13 +207,5 @@ with tab1:
         ))
     else:
         st.write("No courses found.")
-
-with tab2:
-    st.subheader("Ranked Results")
-    display_cols = ['Name', 'Holes', 'BTP Ranking', 'Price', 'dist_miles', 'Played already', 'Final Score']
-    st.dataframe(
-        results[display_cols].style.format({'Price': '{:.0f}', 'dist_miles': '{:.1f}', 'Final Score': '{:.2f}'}),
-        hide_index=True, use_container_width=True
-    )
 
 st.caption("⚠️ Distances are calculated 'as the crow flies.' Cape Cod travel times may vary!")
