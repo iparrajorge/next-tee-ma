@@ -5,8 +5,9 @@ import pydeck as pdk
 import os
 from geopy.geocoders import Nominatim
 
-# Define the logo filename once so we can use it in multiple places
-LOGO_FILENAME = "logo.png"
+# Define separate filenames for the tab and the header
+FAVICON_FILENAME = "favicon.png"  # The tiny one for the browser tab
+HEADER_LOGO_FILENAME = "logo.png" # The main logo for the page
 
 # ==========================================
 # 1. PAGE SETUP & HEADER (NextTee Branding)
@@ -18,27 +19,31 @@ LOGO_FILENAME = "logo.png"
 st.set_page_config(
     page_title="NextTee MA", 
     layout="wide", 
-    page_icon=LOGO_FILENAME if os.path.exists(LOGO_FILENAME) else "⛳"
+    # Use the favicon here
+    page_icon=FAVICON_FILENAME if os.path.exists(FAVICON_FILENAME) else "⛳"
 )
 
 # B. Handle Logo and Title Layout
-header_col1, header_col2 = st.columns([1, 7])
+if os.path.exists(HEADER_LOGO_FILENAME):
+    st.image(HEADER_LOGO_FILENAME, width=450)
+st.subheader(
+    "A Massachusetts Golf Course Recommender", 
+    help="""
+**How NextTee Works:**
 
-with header_col1:
-    # This displays the logo on the actual page next to your title
-    if os.path.exists(LOGO_FILENAME):
-        st.image(LOGO_FILENAME, width=100) 
-    else:
-        st.warning(f"Waiting for '{LOGO_FILENAME}' file.")
+This app uses a user-weighted multi-objective optimization algorithm to rank public courses in Massachusetts.
 
-with header_col2:
-    # The Branded Title
-    st.markdown("# NextTee<sup>MA</sup>", unsafe_allow_html=True)
-    
-    # The Subtitle
-    st.markdown("### A Massachusetts Golf Course Recommender")
+Go to the left side and enter your preferences. The results will adapt automatically.
 
-st.markdown("---")
+* **Course History:** Have you played the course before? How adventurous do you feel? Show all the courses or those you haven't played yet?
+* **Course Size:** 18 or 9? How much time do you have?
+* **Price:** Do you want to keep cost under control? Is this a special ocasion? You decide.
+* **Prestige:** Based on the BTP Ranking.
+* **Proximity:** Calculated via 'as the crow flies' distance from your location.
+
+*Note: Traffic to the Cape isn't factored into the mileage!*
+    """
+)
 
 # 2. LOAD DATA
 try:
