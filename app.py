@@ -4,6 +4,13 @@ import numpy as np
 import pydeck as pdk
 import os
 from geopy.geocoders import Nominatim
+from streamlit_gsheets import GSheetsConnection
+
+# Create the connection object
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+# Replace 'YOUR_SHEET_URL' with the actual URL of your Google Sheet
+SHEET_URL = "https://docs.google.com/spreadsheets/d/13qdUj2WBmp3mMTYSUtsbuITn3TPEHro-NTt73ZylzGI/edit?usp=sharing"
 
 # Define separate filenames for the tab and the header
 FAVICON_FILENAME = "favicon.png"  # The tiny one for the browser tab
@@ -133,7 +140,11 @@ st.sidebar.markdown(f"""
 """)
 
 # 4. DATA FILTERING & CALCULATION
-df = df_raw[df_raw['Holes'] == hole_choice].copy()
+cloud_data = conn.read(spreadsheet=SHEET_URL, ttl=0) # ttl=0 ensures it's never stale
+df_raw_with_played = df_raw.merge(cloud_data, on="Course_ID", how="left").fillna(0)
+
+# Then your existing filtering logic continues using df_raw_with_played
+df = df_raw_with_played[df_raw_with_played['Holes'] == hole_choice].copy()
 
 # New logic: Only filter if 'New' is selected. 
 # This treats any value > 0 (1, 2, etc.) as 'Played'.
@@ -181,11 +192,32 @@ tab1, tab2 = st.tabs(["📊 Ranked Table", "🗺️ Map View"])
 
 with tab1:
     st.subheader("Ranked Results")
-    display_cols = ['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Played already', 'Holes']
-    st.dataframe(
-        results[display_cols].style.format({'Price': '{:.0f}', 'dist_miles': '{:.1f}', 'Score': '{:.2f}'}),
-        hide_index=True, use_container_width=True
+    
+    # Define which columns to show
+    display_cols = ['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Played', 'Holes', 'Course_ID']
+    
+    # THE INTERACTIVE TABLE
+    edited_df = st.data_editor(
+        results[display_cols],
+        column_config={
+            "Played": st.column_config.CheckboxColumn("Played already?", default=False),
+            "Price": st.column_config.NumberColumn(format="$%d"),
+            "dist_miles": st.column_config.NumberColumn(format="%.1f mi"),
+            "Score": st.column_config.NumberColumn(format="%.2f"),
+            "Course_ID": None  # This hides the ID from the user but keeps it in the data
+        },
+        disabled=['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Holes'],
+        hide_index=True, 
+        use_container_width=True
     )
+
+    # THE SYNC BUTTON
+    if st.button("Sync My Progress ☁️"):
+        # We only push the ID and Played status back to the sheet
+        # This keeps the spreadsheet clean and light
+        update_data = edited_df[["Course_ID", "Played"]]
+        conn.update(spreadsheet=SHEET_URL, data=update_data)
+        st.success("Changes saved! Refresh the page or open on mobile to see updates.")
 
 with tab2:
     st.subheader(f"Top Recommended {hole_choice}-Hole Courses")
