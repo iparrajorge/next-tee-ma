@@ -144,7 +144,7 @@ cloud_data = conn.read(spreadsheet=SHEET_URL, ttl=0) # ttl=0 ensures it's never 
 df_raw_with_played = df_raw.merge(cloud_data, on="Course_ID", how="left").fillna(0)
 
 # Then your existing filtering logic continues using df_raw_with_played
-df = df_raw_with_played[df_raw_with_played['Holes'] == hole_choice].copy()
+df_raw_with_played['Played'] = df_raw_with_played['Played'].astype(bool)
 
 # New logic: Only filter if 'New' is selected. 
 # This treats any value > 0 (1, 2, etc.) as 'Played'.
@@ -213,11 +213,10 @@ with tab1:
 
     # THE SYNC BUTTON
     if st.button("Sync My Progress ☁️"):
-        # We only push the ID and Played status back to the sheet
-        # This keeps the spreadsheet clean and light
         update_data = edited_df[["Course_ID", "Played"]]
+        # The connection now has 'Service Account' powers and won't throw that error
         conn.update(spreadsheet=SHEET_URL, data=update_data)
-        st.success("Changes saved! Refresh the page or open on mobile to see updates.")
+        st.success("Synced!")
 
 with tab2:
     st.subheader(f"Top Recommended {hole_choice}-Hole Courses")
