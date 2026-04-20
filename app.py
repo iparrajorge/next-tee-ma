@@ -165,9 +165,10 @@ with tab1:
                 "Price": st.column_config.NumberColumn(format="$%d"),
                 "dist_miles": st.column_config.NumberColumn(format="%.1f mi"),
                 "Score": st.column_config.NumberColumn(format="%.2f"),
+                "Website_Link": st.column_config.LinkColumn("Website", display_text="Visit Site"),
                 "Course_ID": None 
             },
-            disabled=['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles'],
+            disabled=['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Website_Link'],
             hide_index=True, 
             use_container_width=True
         )

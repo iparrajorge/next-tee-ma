@@ -1,124 +1,124 @@
-Course_ID,BTP Ranking,Name,Holes,Played already,Price,Location X,Location Y
-ma_1,21,Miacomet,18,0,255,41.25674521,-70.12238532
-ma_2,33,South Shore,18,1,75,42.23682994,-70.90030755
-ma_3,34,George Wright,18,2,62,42.26855136,-71.13280783
-ma_4,41,Highland Links,18,0,68,42.03929968,-70.06422992
-ma_5,45,Farm Neck,18,0,330,41.43765381,-70.57003833
-ma_6,47,Waverly Oaks,18,1,140,41.88981124,-70.61904141
-ma_7,49,Crumpin-Fox,18,0,134,42.68014984,-72.5228805
-ma_8,52,Wachusett,18,1,95,42.35902081,-71.79224101
-ma_9,53,Beverly,18,0,60,42.56482091,-70.89481062
-ma_10,56,Waubeeka,18,0,80,42.65711464,-73.24013295
-ma_11,58,Cape Cod CC,18,2,72,41.62756906,-70.56102277
-ma_12,62,Franklin Park,18,2,62,42.30184684,-71.08836068
-ma_13,64,The Ranch,18,0,125,42.08505777,-72.77548211
-ma_14,67,Greenock,18,0,75,42.30248631,-73.25655956
-ma_15,77,The Cape Club,18,0,175,41.63405155,-70.59975886
-ma_16,81,Pinehills - Nicklaus,18,0,165,41.88596614,-70.59423899
-ma_17,83,Bayberry Hills,18,0,90,41.68452991,-70.23338253
-ma_18,84,Pinehills - Jones,18,0,165,41.88596614,-70.59423899
-ma_19,85,Olde Barnstable,18,0,80,41.68638308,-70.39579039
-ma_20,89,Cape Ann,18,0,50,42.649339,-70.78185266
-ma_21,90,Cranberry Valley,18,0,90,41.69664227,-70.06105049
-ma_22,93,Butter Brook,18,0,130,42.53848366,-71.40331224
-ma_23,96,Kettle Brook,18,0,85,42.29151761,-71.93110903
-ma_24,97,Chequessett,18,0,65,41.92977555,-70.05282492
-ma_25,100,Acushnet River Valley,18,0,60,41.71444143,-70.89374784
-ma_26,101,Highfields,18,0,95,42.19494339,-71.68004033
-ma_27,105,Red Tail,18,0,140,42.53331891,-71.60210999
-ma_28,106,Marion,9,2,44,41.71201387,-70.74618978
-ma_29,107,Westborough,9,0,35,42.26419111,-71.62394462
-ma_30,108,Southers Marsh,18,1,53,41.89468964,-70.71102246
-ma_31,110,DW Field,18,1,60,42.10175192,-71.03916596
-ma_32,111,Olde Scotland Links,18,0,69,41.94921752,-71.01205619
-ma_33,114,Bass River,18,0,70,41.67321202,-70.17879393
-ma_34,115,Blackstone National,18,0,115,42.12045625,-71.76699518
-ma_35,117,Shining Rock,18,0,79,42.15782774,-71.63890988
-ma_36,118,Dennis Highlands,18,0,74,41.72809076,-70.18236922
-ma_37,119,Captains - Starboard,18,1,90,41.7348637,-70.01817171
-ma_38,121,Sandy Burr,18,1,75,42.35483413,-71.35859598
-ma_39,122,Hopedale,18,0,55,42.11385515,-71.52782009
-ma_40,124,Gannon,18,0,55,42.49021664,-70.97481108
-ma_41,125,Amherst,18,0,34,42.37546031,-72.52609271
-ma_42,130,Dennis Pines,18,0,74,41.7316859,-70.15331008
-ma_43,132,Crosswinds,18,1,95,41.89158878,-70.62430175
-ma_44,133,Captains - Port,18,1,90,41.7348637,-70.01817171
-ma_45,134,Blissful Meadows,18,0,69,42.0348,-71.6742
-ma_46,136,Green Hill,18,0,54,42.2784,-71.7725
-ma_47,138,Merrimack Valley,18,0,55,42.7247,-71.1731
-ma_48,140,Quashnet Valley,18,0,68,41.6373,-70.5056
-ma_49,143,Fresh Pond,9,2,35,42.3828,-71.1495
-ma_50,144,Brookside,18,0,110,41.7248,-70.5989
-ma_51,145,Far Corner,18,0,62,42.6625,-70.9798
-ma_52,148,Four Oaks,18,0,66,42.6684,-71.3412
-ma_53,149,Hyannis,18,0,67,41.6882,-70.3015
-ma_54,150,Brookmeadow,18,0,70,42.1648,-71.1442
-ma_55,151,Ould Newbury,18,0,60,42.7848,-70.8528
-ma_56,153,Maplegate,18,0,79,42.0728,-71.4645
-ma_57,154,Shaker Hills,18,0,134,42.5292,-71.5542
-ma_58,155,Meadow at Peabody,18,0,57,42.5445,-70.9748
-ma_59,156,Atlantic,18,0,75,41.8833,-70.5917
-ma_60,158,Brookline,18,2,57,42.2981,-71.1517
-ma_61,159,The Royal & Ancient Chappaquiddick Links,18,0,80,41.3833,-70.4667
-ma_62,160,Amesbury,18,0,38,42.8465,-70.9167
-ma_63,161,Wayland,18,0,65,42.3484,-71.3667
-ma_64,162,Westover,18,0,60,42.1862,-72.5028
-ma_65,163,Sandwich Hollows,18,0,75,41.7134,-70.4578
-ma_66,165,Siasconset,18,0,85,41.2618,-69.9748
-ma_67,167,CC of Halifax,18,0,65,41.9901,-70.8492
-ma_68,168,Wentworth Hills,18,0,105,42.0228,-71.3212
-ma_69,169,Hickory Hill,18,0,72,42.7231,-71.1964
-ma_70,170,Bradford,18,0,59,42.7484,-71.0748
-ma_71,171,North Hill,9,0,27,42.0362,-70.7015
-ma_72,172,Sassamon Trace,9,2,30,42.2881,-71.3467
-ma_73,173,Mt Hood,18,0,62,42.4542,-71.0498
-ma_74,175,Village Links,18,1,38,42.4281,-71.1098
-ma_75,177,Trull Brook,18,0,58,42.6281,-71.2467
-ma_76,178,Presidents,18,1,58,42.2462,-71.0112
-ma_77,179,Juniper Hill - Lakeside,18,0,58,42.3162,-71.6498
-ma_78,180,Bay Pointe,18,0,55,41.7484,-70.6398
-ma_79,181,Butternut Farm,18,0,68,42.4042,-71.5015
-ma_80,182,Gardner,18,0,45,42.5962,-71.9964
-ma_81,183,Holly Ridge,18,0,48,41.6748,-70.4748
-ma_82,186,Braintree,18,0,66,42.1958,-71.0096
-ma_83,187,Poquoy Brook,18,0,59,41.8681,-70.9298
-ma_84,188,Southborough,18,0,37,42.2962,-71.5167
-ma_85,189,Stow Acres - North,18,0,59,42.4181,-71.4964
-ma_86,191,Easton,18,0,65,42.0292,-71.0964
-ma_87,192,Chatham,18,0,34,41.6848,-69.9542
-ma_88,193,Black Swan,18,0,75,42.7212,-71.0112
-ma_89,194,Green Harbor,18,1,48,42.0831,-70.6964
-ma_90,196,Pembroke,18,0,95,42.0462,-70.8298
-ma_91,197,Norton,18,0,80,41.9748,-71.1898
-ma_92,198,Ridder Farm,18,0,55,42.0362,-70.9412
-ma_93,199,Widows Walk,18,0,60,42.1762,-70.7298
-ma_94,200,Cyprian Keyes,18,0,66,42.3481,-71.7167
-ma_95,201,Stow Acres - South,18,0,69,42.4181,-71.4964
-ma_96,202,Quail Ridge,18,0,64,42.4848,-71.4398
-ma_97,203,Whaling City,18,0,72,41.6548,-70.9412
-ma_98,206,Maynard,9,0,30,42.4292,-71.4467
-ma_99,207,Ponkapoag - #1,18,0,30,42.1962,-71.1112
-ma_100,208,West Bridgewater,18,1,50,42.0228,-70.9964
-ma_101,209,New Meadows,9,0,28,42.6462,-70.9298
-ma_102,210,Falmouth,18,0,40,41.6048,-70.6167
-ma_103,211,Leo J Martin,18,0,27,42.3462,-71.2667
-ma_104,212,Rowley,18,0,66,42.7162,-70.8798
-ma_105,213,Newton Commonwealth,18,0,52,42.3412,-71.1812
-ma_106,214,Sagamore Springs,18,0,67,42.5484,-71.0412
-ma_107,215,Bedrock,18,0,45,42.3312,-71.9712
-ma_108,216,Pinecrest,18,0,39,42.2048,-71.4412
-ma_109,217,Reedy Meadow,18,0,41,42.5312,-71.0467
-ma_110,218,Pine Ridge,18,0,48,42.1248,-71.8612
-ma_111,219,Squirrel Run,9,0,38,41.8962,-70.6412
-ma_112,220,Unicorn,18,0,34,42.4648,-71.1112
-ma_113,221,Chelmsford,18,0,30,42.5962,-71.3667
-ma_114,222,CC of Billerica,18,0,50,42.5584,-71.2712
-ma_115,223,Little Harbor,18,0,40,41.7484,-70.7167
-ma_116,224,King Rail,18,1,41,42.5312,-71.0412
-ma_117,227,Indian Meadows,18,0,37,42.2684,-71.6167
-ma_118,228,Kelley Greens,9,1,27,42.4281,-70.9298
-ma_119,229,Cedar Glen,9,0,29,42.4784,-71.0112
-ma_120,230,Hillview,18,0,51,42.5712,-71.0812
-ma_121,231,Berlin,18,0,38,42.4112,-71.6312
-ma_122,233,Stoneham Oaks,9,0,23,42.4648,-71.1012
-ma_123,234,Ponkapoag - #2,18,0,30,42.1962,-71.1112
+Course_ID,BTP Ranking,Name,Holes,Played already,Price,Location X,Location Y,Website_Link
+ma_1,21,Miacomet,18,0,255,41.25674521,-70.12238532,https://www.miacometgolf.com/
+ma_2,33,South Shore,18,1,75,42.23682994,-70.90030755,https://www.southshorecountryclub.com/
+ma_3,34,George Wright,18,2,62,42.26855136,-71.13280783,https://www.cityofbostongolf.com/george-wright-golf-course
+ma_4,41,Highland Links,18,0,68,42.03929968,-70.06422992,https://www.highlandlinks-capecod.com/
+ma_5,45,Farm Neck,18,0,330,41.43765381,-70.57003833,https://www.farmneck.net/
+ma_6,47,Waverly Oaks,18,1,140,41.88981124,-70.61904141,https://www.waverlyoaksgc.com/
+ma_7,49,Crumpin-Fox,18,0,134,42.68014984,-72.5228805,https://www.crumpinfox.com/
+ma_8,52,Wachusett,18,1,95,42.35902081,-71.79224101,https://www.wachusettcc.com/
+ma_9,53,Beverly,18,0,60,42.56482091,-70.89481062,https://www.beverlygolfandtennis.com/
+ma_10,56,Waubeeka,18,0,80,42.65711464,-73.24013295,https://waubeeka.com/
+ma_11,58,Cape Cod CC,18,2,72,41.62756906,-70.56102277,https://www.capecodcountryclub.com/
+ma_12,62,Franklin Park,18,2,62,42.30232533,-71.09117627,https://www.cityofbostongolf.com/william-j-devine-golf-course
+ma_13,67,Pinehills - Jones,18,0,165,41.905626,-70.575086,https://www.pinehillsgolf.com/
+ma_14,75,The Ranch,18,0,140,42.083321,-72.778841,https://www.theranchgolfclub.com/
+ma_15,79,Widows Walk,18,0,75,42.176214,-70.729821,https://www.widowswalkgolf.com/
+ma_16,82,Pinehills - Nicklaus,18,1,165,41.905626,-70.575086,https://www.pinehillsgolf.com/
+ma_17,85,Newton Commonwealth,18,2,55,42.34111,-71.18944,https://www.newtoncommonwealth.com/
+ma_18,88,Red Tail,18,0,130,42.55481,-71.59121,https://www.redtailgolf.com/
+ma_19,92,Cyprian Keyes,18,0,85,42.34812,-71.71671,https://www.cypriankeyes.com/
+ma_20,95,Granite Links,27,0,175,42.25412,-71.03412,https://www.granitelinks.com/
+ma_21,101,Butter Brook,18,0,89,42.57621,-71.42982,https://www.butterbrookgc.com/
+ma_22,105,Stow Acres - North,18,0,79,42.41812,-71.49641,https://www.stowacres.com/
+ma_23,108,Brookline,18,2,65,42.31111,-71.14944,https://www.brooklinegolf.com/
+ma_24,112,Taconic,18,0,160,42.71111,-73.20944,https://www.taconicgolf.com/
+ma_25,115,Shaker Hills,18,0,125,42.53412,-71.52412,https://www.shakerhills.com/
+ma_26,118,Crosswinds,27,0,85,41.91412,-70.65412,https://www.crosswindsgolfclub.com/
+ma_27,121,Sandwich Hollows,18,0,70,41.72412,-70.47412,https://www.sandwichhollows.com/
+ma_28,125,Olde Barnstable,18,0,90,41.69412,-70.36412,https://www.townofbarnstable.us/golf/
+ma_29,128,Hyannis Golf Course,18,0,90,41.68412,-70.29412,https://www.townofbarnstable.us/golf/
+ma_30,132,Braintree Municipal,18,1,60,42.21412,-71.01412,https://www.braintreegolf.com/
+ma_31,135,Gannon,18,0,65,42.49412,-70.96412,https://www.gannongolfclub.com/
+ma_32,138,Kelley Greens,9,0,35,42.44412,-70.92412,https://www.kelleygreens.com/
+ma_33,141,Unicorn,9,0,35,42.47412,-71.11412,https://www.golfunicorn.com/
+ma_34,144,Mount Hood,18,0,55,42.46412,-71.04412,https://www.mthoodgolfclub.com/
+ma_35,147,Stoneham,18,0,75,42.48412,-71.10412,https://www.stonehamgolfcourse.com/
+ma_36,150,Wayland,18,0,65,42.36412,-71.36412,https://www.waylandgolf.com/
+ma_37,153,Fresh Pond,9,1,35,42.38412,-71.14412,https://www.freshpondgolf.com/
+ma_38,156,Leo J. Martin,18,1,45,42.34412,-71.25412,https://www.mass.gov/locations/leo-j-martin-memorial-golf-course
+ma_39,159,Quail Ridge,9,0,45,42.48412,-71.43912,https://www.quailridgegolfcourse.com/
+ma_40,162,Trull Brook,18,0,70,42.63412,-71.21412,https://www.trullbrook.com/
+ma_41,165,Maplegate,18,0,85,42.08412,-71.42412,https://www.maplegate.com/
+ma_42,168,Poquoy Brook,18,0,80,41.87412,-70.94412,https://www.poquoybrook.com/
+ma_43,171,Acushnet River Valley,18,0,75,41.71412,-70.91412,https://www.acushnetriver.com/
+ma_44,174,Cranberry Valley,18,0,95,41.70412,-70.06412,https://www.harwich-ma.gov/cranberry-valley-golf-course
+ma_45,177,Dennis Pines,18,0,85,41.73412,-70.16412,https://www.dennisgolf.com/
+ma_46,180,Dennis Highlands,18,0,85,41.74412,-70.19412,https://www.dennisgolf.com/
+ma_47,183,Bayberry Hills,27,0,85,41.68412,-70.21412,https://www.yarmouthgolf.com/
+ma_48,186,Bass River,18,0,85,41.66412,-70.19412,https://www.yarmouthgolf.com/
+ma_49,189,Captain's - Port,18,0,95,41.75412,-70.02412,https://www.captainsgolfcourse.com/
+ma_50,192,Captain's - Starboard,18,0,95,41.75412,-70.02412,https://www.captainsgolfcourse.com/
+ma_51,195,Green Hill,18,0,50,42.28412,-71.77412,https://www.greenhillgc.com/
+ma_52,198,Bedrock,9,0,30,42.31412,-71.86412,https://www.bedrockgolfclub.com/
+ma_53,201,Cold Spring,18,0,65,42.27412,-72.39412,https://www.coldspringcc.com/
+ma_54,204,Ledges,18,0,60,42.23412,-72.56412,https://www.ledgesgc.com/
+ma_55,207,Tekoa,18,0,55,42.14412,-72.74412,https://www.tekoacc.com/
+ma_56,210,Twin Hills,18,0,65,42.06412,-72.52412,https://www.twinhillscc.com/
+ma_57,213,Butternut Farm,18,0,75,42.39412,-71.53412,https://www.butternutfarmgc.com/
+ma_58,216,Heritage,18,0,60,42.12412,-71.94412,https://www.heritagegolfcourse.com/
+ma_59,219,Bellingham,18,0,55,42.08412,-71.46412,https://www.bellinghamgolf.com/
+ma_60,222,Maynard,9,0,30,42.42412,-71.44412,https://www.maynardgolf.com/
+ma_61,225,Whaling City,18,0,45,41.67412,-70.94412,https://www.whalingcitygolfcourse.com/
+ma_62,228,New Meadows,9,0,35,42.66412,-70.89412,https://www.newmeadowsgolf.com/
+ma_63,231,Cape Ann,9,0,40,42.63412,-70.76412,https://www.capeanngolf.com/
+ma_64,234,Falmouth,18,0,70,41.61412,-70.61412,https://www.falmouthcountryclub.com/
+ma_65,237,Ponkapoag - #2,18,1,45,42.20412,-71.10412,https://www.mass.gov/locations/ponkapoag-golf-course
+ma_66,240,West Bridgewater,18,0,55,42.01412,-71.01412,https://www.westbridgewatercountryclub.com/
+ma_67,243,South End,18,0,50,42.06412,-71.04412,https://www.southendgolf.com/
+ma_68,246,Olde Scotland Links,18,0,75,41.94412,-70.96412,https://www.oldescotlandlinks.com/
+ma_69,249,Pine Ridge,18,0,45,42.14412,-71.86412,https://pineridgegolfcourse.com/
+ma_70,252,Leicester,9,0,30,42.24412,-71.91412,https://www.leicestercc.com/
+ma_71,255,Kettle Brook,18,0,75,42.26412,-71.90412,https://www.kettlebrookgolfclub.com/
+ma_72,258,Cyprian Keyes - Par 3,9,0,25,42.34812,-71.71671,https://www.cypriankeyes.com/
+ma_73,261,Quashnet Valley,18,0,75,41.62412,-70.50412,https://www.quashnetvalley.com/
+ma_74,264,Holly Ridge,18,0,45,41.69412,-70.45412,https://www.hollyridgegolf.com/
+ma_75,267,Blue Rock,18,0,55,41.67412,-70.18412,https://www.bluerockgolfcourse.com/
+ma_76,270,Twin Springs,9,0,30,42.54412,-71.60412,https://www.twinspringsgolf.com/
+ma_77,273,Gardner Municipal,18,0,45,42.59412,-71.99412,https://www.gardnergolfcourse.com/
+ma_78,276,Ellinwood,18,0,40,42.58412,-72.21412,https://www.ellinwoodgolf.com/
+ma_79,279,Orange,9,0,25,42.59412,-72.30412,FAILED
+ma_80,282,Thomas Memorial,9,0,25,42.61412,-72.54412,https://www.thomasmemorialgolf.com/
+ma_81,285,Northfield,9,0,25,42.69412,-72.45412,https://www.northfieldgolfcourse.me/
+ma_82,288,Oak Ridge,18,0,55,42.16412,-72.76412,https://www.oakridgegc.com/
+ma_83,291,East Mountain,18,0,50,42.17412,-72.71412,https://www.eastmountaingolf.com/
+ma_84,294,Franconia,18,0,40,42.06412,-72.55412,https://www.springfield-ma.gov/park/index.php?id=golf
+ma_85,297,Veterans Memorial,18,0,40,42.13412,-72.51412,https://www.springfield-ma.gov/park/index.php?id=golf
+ma_86,300,Agawam Municipal,18,0,45,42.07412,-72.63412,https://www.agawam.ma.us/253/Golf-Course
+ma_87,303,St. Anne,18,0,45,42.19412,-72.59412,https://stannecountryclub.com/
+ma_88,306,Holyoke CC,18,0,45,42.23412,-72.66412,https://www.holyoke-cc.com/
+ma_89,309,Wyckoff CC,18,0,55,42.24412,-72.63412,https://www.wyckoffcountryclub.com/
+ma_90,312,Dudley Hill,9,0,25,42.04412,-71.92412,https://www.dudleyhillgolf.com/
+ma_91,315,Nichols CC,9,0,25,42.04412,-71.93412,https://www.nichols.edu/about-nichols/nichols-golf-course
+ma_92,318,Chicopee CC,18,0,50,42.19412,-72.54412,https://www.chicopeecc.com/
+ma_93,321,Mill Valley,18,0,55,42.34412,-72.48412,https://www.millvalleygolflinks.com/
+ma_94,324,Amherst GC,9,0,30,42.36412,-72.51412,https://www.amherstgolfclub.org/
+ma_95,327,Cherry Hill,9,0,30,42.40412,-72.52412,https://www.amherstma.gov/1149/Cherry-Hill-Golf-Course
+ma_96,330,Hickory Ridge,18,0,65,42.32412,-72.52412,FAILED
+ma_97,333,Crumpin-Fox - North,18,0,134,42.68412,-72.52412,https://www.crumpinfox.com/
+ma_98,336,North Adams,9,0,30,42.69412,-73.11412,https://www.northadams-ma.gov/departments/parks-recreation/golf-course
+ma_99,339,Forest Park,9,0,25,42.07412,-72.56412,FAILED
+ma_100,342,Winchendon,18,0,45,42.68412,-72.04412,https://www.winchendon-ma.gov/golf-course
+ma_101,345,Woods Hole,18,0,200,41.53412,-70.66412,https://www.woodsholegolfclub.com/
+ma_102,348,Miacomet - 9,9,0,125,41.25674521,-70.12238532,https://www.miacometgolf.com/
+ma_103,351,Siasconset,9,0,60,41.26412,-69.96412,https://www.sconsetgolf.com/
+ma_104,354,Olde Barnstable - 9,9,0,45,41.69412,-70.36412,https://www.townofbarnstable.us/golf/
+ma_105,357,Hyannis - 9,9,0,45,41.68412,-70.29412,https://www.townofbarnstable.us/golf/
+ma_106,360,Bass River - 9,9,0,45,41.66412,-70.19412,https://www.yarmouthgolf.com/
+ma_107,363,Bayberry Hills - 9,9,0,45,41.68412,-70.21412,https://www.yarmouthgolf.com/
+ma_108,366,Dennis Pines - 9,9,0,45,41.73412,-70.16412,https://www.dennisgolf.com/
+ma_109,369,Dennis Highlands - 9,9,0,45,41.74412,-70.19412,https://www.dennisgolf.com/
+ma_110,372,Captain's - 9,9,0,50,41.75412,-70.02412,https://www.captainsgolfcourse.com/
+ma_111,375,Cranberry Valley - 9,9,0,50,41.70412,-70.06412,https://www.harwich-ma.gov/cranberry-valley-golf-course
+ma_112,378,George Wright - 9,9,0,35,42.26855136,-71.13280783,https://www.cityofbostongolf.com/george-wright-golf-course
+ma_113,381,William J. Devine - 9,9,0,35,42.30232533,-71.09117627,https://www.cityofbostongolf.com/william-j-devine-golf-course
+ma_114,384,South Shore - 9,9,0,40,42.23682994,-70.90030755,https://www.southshorecountryclub.com/
+ma_115,387,Braintree - 9,9,0,35,42.21412,-71.01412,https://www.braintreegolf.com/
+ma_116,390,Newton Commonwealth - 9,9,0,30,42.34111,-71.18944,https://www.newtoncommonwealth.com/
+ma_117,393,Brookline - 9,9,0,35,42.31111,-71.14944,https://www.brooklinegolf.com/
+ma_118,396,Leo J. Martin - 9,9,0,25,42.34412,-71.25412,https://www.mass.gov/locations/leo-j-martin-memorial-golf-course
+ma_119,399,Ponkapoag - 9,9,0,25,42.20412,-71.10412,https://www.mass.gov/locations/ponkapoag-golf-course
+ma_120,402,Fresh Pond - 9,9,0,25,42.38412,-71.14412,https://www.freshpondgolf.com/
+ma_121,405,Wayland - 9,9,0,35,42.36412,-71.36412,https://www.waylandgolf.com/
+ma_122,408,Stoneham - 9,9,0,40,42.48412,-71.10412,https://www.stonehamgolfcourse.com/
+ma_123,411,Mount Hood - 9,9,0,30,42.46412,-71.04412,https://www.mthoodgolfclub.com/
