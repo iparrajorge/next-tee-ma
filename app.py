@@ -156,7 +156,7 @@ with tab1:
     if results.empty:
         st.warning("No courses match those filters. Try opening up your options!")
     else:
-        display_cols = ['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Played', 'Course_ID']
+        display_cols = ['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Played', 'Course_ID', 'Website_Link']
         
         edited_df = st.data_editor(
             results[display_cols],
@@ -165,7 +165,7 @@ with tab1:
                 "Price": st.column_config.NumberColumn(format="$%d"),
                 "dist_miles": st.column_config.NumberColumn(format="%.1f mi"),
                 "Score": st.column_config.NumberColumn(format="%.2f"),
-                "Website_Link": st.column_config.LinkColumn("Website", display_text="Visit Site"),
+                "Website_Link": st.column_config.LinkColumn("Website_Link", display_text="Visit Site"),
                 "Course_ID": None 
             },
             disabled=['Score', 'Name', 'BTP Ranking', 'Price', 'dist_miles', 'Website_Link'],
