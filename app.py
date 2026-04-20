@@ -23,7 +23,24 @@ SHEET_URL = "https://docs.google.com/spreadsheets/d/13qdUj2WBmp3mMTYSUtsbuITn3TP
 if os.path.exists(HEADER_LOGO_FILENAME):
     st.image(HEADER_LOGO_FILENAME, width=450)
 
-st.subheader("A Massachusetts Golf Course Recommender")
+st.subheader(
+    "A Massachusetts Golf Course Recommender", 
+    help="""
+**How NextTee Works:**
+
+This app uses a user-weighted multi-objective optimization algorithm to rank public courses in Massachusetts.
+
+Go to the left side and enter your preferences. The results will adapt automatically.
+
+* **Course History:** Have you played the course before? How adventurous do you feel? Show all the courses or those you haven't played yet?
+* **Course Size:** 18 or 9? How much time do you have?
+* **Price:** Do you want to keep cost under control? Is this a special ocasion? You decide.
+* **Prestige:** Based on the BTP Ranking.
+* **Proximity:** Calculated via 'as the crow flies' distance from your location.
+
+*Note: Traffic to the Cape isn't factored into the mileage!*
+    """
+)
 
 # 2. SIDEBAR - USER INPUTS
 st.sidebar.header("User Preferences")
