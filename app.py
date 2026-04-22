@@ -40,7 +40,7 @@ if "authenticated" not in st.session_state:
 
 # --- AUTHENTICATION UI ---
 if not st.session_state.authenticated:
-    st.markdown("## Find Your Perfect Round of Public Golg in Massachusetts")
+    st.markdown("## Find Your Perfect Round of Public Golg in MA")
     st.markdown("""
     **NextTee MA** uses a custom ranking algorithm to find the best public golf courses 
     based on your specific priorities. Join our community to:
