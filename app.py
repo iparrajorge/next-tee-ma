@@ -17,6 +17,9 @@ st.set_page_config(
     page_icon=FAVICON_FILENAME if os.path.exists(FAVICON_FILENAME) else "⛳"
 )
 
+if os.path.exists(HEADER_LOGO_FILENAME):
+    st.image(HEADER_LOGO_FILENAME, width=450)
+
 # Force-feeding the verified secrets into the connection
 st_supabase = st.connection(
     "supabase",
@@ -71,10 +74,6 @@ if not st.session_state.authenticated:
                 st.error(f"Account could not be created. (Check if email is already in use)")
     
     st.stop() # Stops the rest of the app from loading until logged in
-
-
-if os.path.exists(HEADER_LOGO_FILENAME):
-    st.image(HEADER_LOGO_FILENAME, width=450)
 
 st.subheader(
     "A Massachusetts Golf Course Recommender", 
