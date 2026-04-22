@@ -40,6 +40,16 @@ if "authenticated" not in st.session_state:
 
 # --- AUTHENTICATION UI ---
 if not st.session_state.authenticated:
+    st.title("Find Your Perfect Round of Public Golg in Massachusetts")
+    st.markdown("""
+    **NextTee MA** uses a custom ranking algorithm to find the best public golf courses 
+    based on your specific priorities. Join our community to:
+    * **Personalized Rankings:** Weight Price, Quality, and Distance to fit your mood.
+    * **Track Your Progress:** Save which of the 100+ MA courses you've played.
+    """)
+    
+    st.info("Registration is free. We only use your email to save your personal course history.")
+    
     tab1, tab2 = st.tabs(["Login", "Sign Up"])
 
     with tab1:
