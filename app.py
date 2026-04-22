@@ -7,20 +7,6 @@ from geopy.geocoders import Nominatim
 from streamlit_gsheets import GSheetsConnection
 from st_supabase_connection import SupabaseConnection # Add this
 
-# TEMPORARY DEBUGGING - DELETE AFTER FIXING
-if "connections" not in st.secrets:
-    st.error("❌ The 'connections' section is missing from your secrets!")
-elif "supabase" not in st.secrets["connections"]:
-    st.error("❌ The 'supabase' section is missing from your secrets!")
-else:
-    st.success("✅ Secrets structure detected!")
-    # Check for the specific keys without showing values
-    has_url = "url" in st.secrets["connections"]["supabase"]
-    has_key = "key" in st.secrets["connections"]["supabase"]
-    st.write(f"URL present: {has_url} | Key present: {has_key}")
-
-
-
 # 1. PAGE SETUP
 FAVICON_FILENAME = "favicon.png"
 HEADER_LOGO_FILENAME = "logo.png"
@@ -31,9 +17,13 @@ st.set_page_config(
     page_icon=FAVICON_FILENAME if os.path.exists(FAVICON_FILENAME) else "⛳"
 )
 
-# Initialize Supabase Connection
-# This looks for SUPABASE_URL and SUPABASE_KEY in your secrets.toml
-st_supabase = st.connection("supabase", type=SupabaseConnection)
+# Force-feeding the verified secrets into the connection
+st_supabase = st.connection(
+    "supabase",
+    type=SupabaseConnection,
+    url=st.secrets["connections"]["supabase"]["url"].strip("/"), # Ensures no trailing slash
+    key=st.secrets["connections"]["supabase"]["key"]
+)
 
 # Connection & URL
 conn = st.connection("gsheets", type=GSheetsConnection)
