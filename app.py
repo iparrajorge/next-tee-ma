@@ -7,10 +7,6 @@ from geopy.geocoders import Nominatim
 from streamlit_gsheets import GSheetsConnection
 from st_supabase_connection import SupabaseConnection # Add this
 
-# Initialize Supabase Connection
-# This looks for SUPABASE_URL and SUPABASE_KEY in your secrets.toml
-st_supabase = st.connection("supabase", type=SupabaseConnection)
-
 # 1. PAGE SETUP
 FAVICON_FILENAME = "favicon.png"
 HEADER_LOGO_FILENAME = "logo.png"
@@ -20,6 +16,15 @@ st.set_page_config(
     layout="wide", 
     page_icon=FAVICON_FILENAME if os.path.exists(FAVICON_FILENAME) else "⛳"
 )
+
+# Initialize Supabase Connection
+# This looks for SUPABASE_URL and SUPABASE_KEY in your secrets.toml
+st_supabase = st.connection("supabase", type=SupabaseConnection)
+
+# Connection & URL
+conn = st.connection("gsheets", type=GSheetsConnection)
+SHEET_URL = "https://docs.google.com/spreadsheets/d/13qdUj2WBmp3mMTYSUtsbuITn3TPEHro-NTt73ZylzGI/edit?usp=sharing"
+
 
 # Initialize session state for auth
 if "authenticated" not in st.session_state:
@@ -56,9 +61,6 @@ if not st.session_state.authenticated:
     
     st.stop() # Stops the rest of the app from loading until logged in
 
-# Connection & URL
-conn = st.connection("gsheets", type=GSheetsConnection)
-SHEET_URL = "https://docs.google.com/spreadsheets/d/13qdUj2WBmp3mMTYSUtsbuITn3TPEHro-NTt73ZylzGI/edit?usp=sharing"
 
 if os.path.exists(HEADER_LOGO_FILENAME):
     st.image(HEADER_LOGO_FILENAME, width=450)
