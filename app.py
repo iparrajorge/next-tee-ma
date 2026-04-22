@@ -15,6 +15,12 @@ st_supabase = st.connection("supabase", type=SupabaseConnection)
 FAVICON_FILENAME = "favicon.png"
 HEADER_LOGO_FILENAME = "logo.png"
 
+st.set_page_config(
+    page_title="NextTee MA", 
+    layout="wide", 
+    page_icon=FAVICON_FILENAME if os.path.exists(FAVICON_FILENAME) else "⛳"
+)
+
 # Initialize session state for auth
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -50,12 +56,6 @@ if not st.session_state.authenticated:
     
     st.stop() # Stops the rest of the app from loading until logged in
 
-st.set_page_config(
-    page_title="NextTee MA", 
-    layout="wide", 
-    page_icon=FAVICON_FILENAME if os.path.exists(FAVICON_FILENAME) else "⛳"
-)
-
 # Connection & URL
 conn = st.connection("gsheets", type=GSheetsConnection)
 SHEET_URL = "https://docs.google.com/spreadsheets/d/13qdUj2WBmp3mMTYSUtsbuITn3TPEHro-NTt73ZylzGI/edit?usp=sharing"
@@ -89,7 +89,7 @@ if st.sidebar.button("Sign Out"):
     st_supabase.auth.sign_out()
     st.session_state.authenticated = False
     st.rerun()
-    
+
 st.sidebar.header("User Preferences")
 
 hole_choice = st.sidebar.radio("Course Size", [18, 9], index=0, format_func=lambda x: f"{x} Holes")
