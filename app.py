@@ -58,10 +58,17 @@ if not st.session_state.authenticated:
         new_password = st.text_input("Password", type="password", key="signup_pw")
         if st.button("Create Account"):
             try:
-                st_supabase.auth.sign_up({"email": new_email, "password": new_password})
-                st.info("Check your email for a confirmation link!")
+                response = st_supabase.auth.sign_up({"email": new_email, "password": new_password})
+                # If confirm email is OFF, Supabase returns the session immediately
+                if response.session:
+                    st.session_state.authenticated = True
+                    st.session_state.user_id = response.user.id
+                    st.success("Welcome aboard!")
+                    st.rerun()
+                else:
+                    st.success("Account created! Please log in.")
             except Exception as e:
-                st.error(f"Error: {e}")
+                st.error(f"Account could not be created. (Check if email is already in use)")
     
     st.stop() # Stops the rest of the app from loading until logged in
 
