@@ -40,7 +40,6 @@ if "authenticated" not in st.session_state:
 
 # --- AUTHENTICATION UI ---
 if not st.session_state.authenticated:
-    st.title("⛳ Welcome to NextTee MA")
     tab1, tab2 = st.tabs(["Login", "Sign Up"])
 
     with tab1:
