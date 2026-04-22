@@ -5,10 +5,50 @@ import pydeck as pdk
 import os
 from geopy.geocoders import Nominatim
 from streamlit_gsheets import GSheetsConnection
+from st_supabase_connection import SupabaseConnection # Add this
+
+# Initialize Supabase Connection
+# This looks for SUPABASE_URL and SUPABASE_KEY in your secrets.toml
+st_supabase = st.connection("supabase", type=SupabaseConnection)
 
 # 1. PAGE SETUP
 FAVICON_FILENAME = "favicon.png"
 HEADER_LOGO_FILENAME = "logo.png"
+
+# Initialize session state for auth
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+    st.session_state.user_id = None
+
+# --- AUTHENTICATION UI ---
+if not st.session_state.authenticated:
+    st.title("⛳ Welcome to NextTee MA")
+    tab1, tab2 = st.tabs(["Login", "Sign Up"])
+
+    with tab1:
+        email = st.text_input("Email", key="login_email")
+        password = st.text_input("Password", type="password", key="login_pw")
+        if st.button("Log In"):
+            try:
+                response = st_supabase.auth.sign_in_with_password({"email": email, "password": password})
+                if response:
+                    st.session_state.authenticated = True
+                    st.session_state.user_id = response.user.id
+                    st.rerun()
+            except Exception as e:
+                st.error("Invalid login credentials.")
+
+    with tab2:
+        new_email = st.text_input("Email", key="signup_email")
+        new_password = st.text_input("Password", type="password", key="signup_pw")
+        if st.button("Create Account"):
+            try:
+                st_supabase.auth.sign_up({"email": new_email, "password": new_password})
+                st.info("Check your email for a confirmation link!")
+            except Exception as e:
+                st.error(f"Error: {e}")
+    
+    st.stop() # Stops the rest of the app from loading until logged in
 
 st.set_page_config(
     page_title="NextTee MA", 
@@ -43,6 +83,13 @@ Go to the left side and enter your preferences. The results will adapt automatic
 )
 
 # 2. SIDEBAR - USER INPUTS
+# This only runs if st.session_state.authenticated is True
+st.sidebar.write(f"Logged in as: {st_supabase.auth.get_user().user.email}")
+if st.sidebar.button("Sign Out"):
+    st_supabase.auth.sign_out()
+    st.session_state.authenticated = False
+    st.rerun()
+    
 st.sidebar.header("User Preferences")
 
 hole_choice = st.sidebar.radio("Course Size", [18, 9], index=0, format_func=lambda x: f"{x} Holes")

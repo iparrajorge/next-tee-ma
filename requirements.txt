@@ -4,3 +4,5 @@ numpy
 pydeck
 geopy
 st-gsheets-connection
+supabase
+st-supabase-connection
