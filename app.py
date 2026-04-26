@@ -30,6 +30,13 @@ st_supabase = st.connection(
     key=st.secrets["connections"]["supabase"]["key"]
 )
 
+# On app load, check for existing session
+if not st.session_state.authenticated:
+    existing_session = st_supabase.auth.get_session()
+    if existing_session:
+        st.session_state.authenticated = True
+        st.session_state.user_id = existing_session.user.id
+
 conn = st.connection("gsheets", type=GSheetsConnection)
 SHEET_URL = "https://docs.google.com/spreadsheets/d/13qdUj2WBmp3mMTYSUtsbuITn3TPEHro-NTt73ZylzGI/edit?usp=sharing"
 
