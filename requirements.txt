@@ -6,3 +6,4 @@ geopy
 st-gsheets-connection
 supabase
 st-supabase-connection
+streamlit-sortables
