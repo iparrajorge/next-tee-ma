@@ -63,7 +63,7 @@ def render(df_all, conn):
     current = [c for c in current if c in set(played_courses)]
     st.session_state.personal_ranking = current
 
-    st.caption("Drag to reorder your personal ranking")
+    st.caption("Drag to reorder your personal ranking. If a friend asked you to play tomorrow and ofered you two courses which one would you choose? Money and distance don't matter")
     new_order = sort_items(current, key="personal_ranking_sort")
 
     if new_order != current:
