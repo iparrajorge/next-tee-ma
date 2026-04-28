@@ -1,6 +1,14 @@
 import streamlit as st
 from config import DEBUG_MODE
 
+def _log_event(st_supabase, event: str, user_id: str):
+    try:
+        st_supabase.table("user_log").insert({
+            "event":   event,
+            "user_id": user_id,
+        }).execute()
+    except Exception:
+        pass  # never let logging break the app
 
 def init_session():
     """Initialise auth-related session state keys on first run."""
@@ -52,6 +60,7 @@ def show_auth_ui(st_supabase):
                 if response:
                     st.session_state.authenticated = True
                     st.session_state.user_id = response.user.id
+                    _log_event(st_supabase, "login", response.user.id)  # ← add this
                     st.rerun()
             except Exception:
                 st.error("Invalid login credentials.")
@@ -67,6 +76,7 @@ def show_auth_ui(st_supabase):
                 if response.session:
                     st.session_state.authenticated = True
                     st.session_state.user_id = response.user.id
+                    _log_event(st_supabase, "signup", response.user.id)  # ← add this
                     st.success("Welcome aboard!")
                     st.rerun()
                 else:
