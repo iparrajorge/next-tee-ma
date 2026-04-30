@@ -5,7 +5,6 @@ import streamlit as st
 
 def render(results):
     """Render the 🗺️ Map View tab."""
-    st.session_state.active_tab = 1
 
     if results.empty:
         st.warning("No courses match those filters.")

@@ -33,11 +33,10 @@ def _btp_insert_position(new_name, current_ranking, df_ref):
     return (min(pos_better, pos_worse) + max(pos_better, pos_worse) + 1) // 2
 
 
-def render(df_all, conn):
+def render(df_all, st_supabase):
     """Render the 🏅 Personal Ranking tab."""
-    st.session_state.active_tab = 2
 
-    played_courses = df_all[df_all["Played"] == True]["Name"].tolist()
+    played_courses = df_all[df_all["played"] == True]["Name"].tolist()
 
     if not played_courses:
         st.info(
@@ -64,7 +63,7 @@ def render(df_all, conn):
     st.session_state.personal_ranking = current
 
     st.caption("Drag to reorder your personal ranking. If a friend asked you to play tomorrow and ofered you two courses which one would you choose? Money and distance don't matter")
-    new_order = sort_items(current, key="personal_ranking_sort")
+    new_order = sort_items(current, key=f"personal_ranking_sort_{len(current)}")
 
     if new_order != current:
         st.session_state.personal_ranking = new_order

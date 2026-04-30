@@ -2,9 +2,8 @@ import streamlit as st
 from config import SHEET_URL
 
 
-def render(results, conn):
+def render(results, st_supabase):
     """Render the 📊 Ranked Table tab."""
-    st.session_state.active_tab = 0
 
     if results.empty:
         st.warning("No courses match those filters. Try opening up your options!")
@@ -12,7 +11,7 @@ def render(results, conn):
 
     display_cols = [
         "Score", "Name", "BTP Ranking", "Price",
-        "dist_miles", "Played", "Course_ID", "Website_Link",
+        "dist_miles", "played", "Course_ID", "Website_Link",
     ]
 
     display_df = results[display_cols].copy()
@@ -32,7 +31,7 @@ def render(results, conn):
 
     display_cols_final = [
         "Score", "Name", "BTP Ranking", "Price",
-        "dist_miles", "Played", "Course_ID", "Link",
+        "dist_miles", "played", "Course_ID", "Link",
     ]
 
     edited_df = st.data_editor(
@@ -58,6 +57,13 @@ def render(results, conn):
     )
 
     if st.button("Sync My Progress ☁️"):
-        conn.update(spreadsheet=SHEET_URL, data=edited_df[["Course_ID", "Played"]])
-        st.cache_data.clear()
+        user_id = st.session_state.user_id
+        played_df = edited_df[edited_df["played"] == True]
+        for _, row in played_df.iterrows():
+            st_supabase.table("user_courses").upsert({
+                "user_id":   user_id,
+                "course_id": row["Course_ID"],
+                "played":    True,
+            }, on_conflict="user_id,course_id").execute()
         st.success("Synced to the Cloud!")
+        st.rerun()
