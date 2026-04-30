@@ -1,5 +1,4 @@
 import streamlit as st
-from config import SHEET_URL
 
 
 def render(results, st_supabase):
