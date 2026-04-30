@@ -78,12 +78,14 @@ def render(df_all, st_supabase):
         "Sync My Ranking ☁️",
         disabled=not st.session_state.get("ranking_changed", False),
     ):
-        import pandas as pd
-        ranking_df = pd.DataFrame({
-            "Course_Name":   st.session_state.personal_ranking,
-            "Personal_Rank": range(1, len(st.session_state.personal_ranking) + 1),
-            "User_ID":       st.session_state.user_id,
-        })
-        # conn.update(spreadsheet=SHEET_URL, data=ranking_df)
+        user_id = st.session_state.user_id
+        for rank, course_name in enumerate(st.session_state.personal_ranking, start=1):
+            course_id = df_all[df_all["Name"] == course_name]["Course_ID"].iloc[0]
+            st_supabase.table("user_courses").upsert({
+                "user_id":       user_id,
+                "course_id":     course_id,
+                "played":        True,
+                "personal_rank": rank,
+            }, on_conflict="user_id,course_id").execute()
         st.session_state.ranking_changed = False
         st.success("Personal ranking synced!")
