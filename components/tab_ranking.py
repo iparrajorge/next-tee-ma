@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit_sortables import sort_items
-from config import SHEET_URL
 
 
 # ── BTP-neighbour insertion ────────────────────────────────────────────────────
