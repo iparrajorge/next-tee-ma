@@ -1,12 +1,11 @@
 import streamlit as st
 
 # ── 1. Page config — must be the very first Streamlit call ────────────────────
-from config import init_page, get_supabase_connection, get_gsheets_connection
+from config import init_page, get_supabase_connection
 init_page()
 
 # ── 2. Connections ────────────────────────────────────────────────────────────
 st_supabase = get_supabase_connection()
-conn        = get_gsheets_connection()
 
 # ── 3. Auth — calls st.stop() if the user is not logged in ───────────────────
 from auth import run_auth
