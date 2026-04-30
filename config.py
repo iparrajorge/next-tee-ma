@@ -1,15 +1,10 @@
 import os
 import streamlit as st
 from st_supabase_connection import SupabaseConnection
-from streamlit_gsheets import GSheetsConnection
 
 # ── Constants ──────────────────────────────────────────────────────────────────
 FAVICON_FILENAME    = "favicon.png"
 HEADER_LOGO_FILENAME = "logo.png"
-SHEET_URL = (
-    "https://docs.google.com/spreadsheets/d/"
-    "13qdUj2WBmp3mMTYSUtsbuITn3TPEHro-NTt73ZylzGI/edit?usp=sharing"
-)
 DEBUG_MODE = True  # Set to True to skip login during development
 
 # ── Page config (must be first Streamlit call in app.py) ──────────────────────
@@ -31,7 +26,3 @@ def get_supabase_connection():
         url=st.secrets["connections"]["supabase"]["url"].strip("/"),
         key=st.secrets["connections"]["supabase"]["key"]
     )
-
-@st.cache_resource
-def get_gsheets_connection():
-    return st.connection("gsheets", type=GSheetsConnection)
