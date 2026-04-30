@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 # ── 1. Page config — must be the very first Streamlit call ────────────────────
 from config import init_page, get_supabase_connection, get_gsheets_connection
@@ -40,7 +39,7 @@ render_sidebar()
 from data import load_data, filter_data, calculate_scores
 
 try:
-    df, df_all = load_data(conn)
+    df, df_all = load_data(st_supabase)
 except Exception as e:
     st.error(f"Error loading data: {e}")
     st.stop()
@@ -48,29 +47,16 @@ except Exception as e:
 df_filtered = filter_data(df)
 results     = calculate_scores(df_filtered)
 
-# ── 7. Tab-persistence JS (unchanged from original) ───────────────────────────
-if "active_tab" not in st.session_state:
-    st.session_state.active_tab = 0
-
-js = f"""
-<script>
-    var tabIndex = {st.session_state.active_tab};
-    var tabs = window.parent.document.querySelectorAll('button[data-baseweb="tab"]');
-    if (tabs.length > tabIndex) {{ tabs[tabIndex].click(); }}
-</script>
-"""
-components.html(js, height=0)
-
 # ── 8. Tabs ───────────────────────────────────────────────────────────────────
 from components import tab_table, tab_map, tab_ranking
 
 tab1, tab2, tab3 = st.tabs(["📊 Ranked Table", "🗺️ Map View", "🏅 Personal Ranking"])
 
 with tab1:
-    tab_table.render(results, conn)
+    tab_table.render(results, st_supabase)
 
 with tab2:
     tab_map.render(results)
 
 with tab3:
-    tab_ranking.render(df_all, conn)
+    tab_ranking.render(df_all, st_supabase)

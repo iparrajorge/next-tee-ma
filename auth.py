@@ -30,7 +30,7 @@ def apply_debug_mode():
     """Bypass login entirely when DEBUG_MODE is on."""
     if DEBUG_MODE:
         st.session_state.authenticated = True
-        st.session_state.user_id = "test-user"
+        st.session_state.user_id = "00000000-0000-0000-0000-000000000000"
 
 
 def show_auth_ui(st_supabase):
