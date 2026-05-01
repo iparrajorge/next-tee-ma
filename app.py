@@ -8,8 +8,9 @@ init_page()
 st_supabase = get_supabase_connection()
 
 # ── 3. Auth — calls st.stop() if the user is not logged in ───────────────────
-from auth import run_auth
+from auth import run_auth, show_logout_button
 run_auth(st_supabase)
+show_logout_button(st_supabase)
 
 # ── 4. App header (only reached when authenticated) ───────────────────────────
 st.subheader(

@@ -86,6 +86,15 @@ def show_auth_ui(st_supabase):
 
     st.stop()
 
+def show_logout_button(st_supabase):
+    """Render a logout button in the sidebar."""
+    st.sidebar.markdown("---")
+    if st.sidebar.button("Log Out"):
+        st_supabase.auth.sign_out()
+        st.session_state.authenticated = False
+        st.session_state.user_id = None
+        st.session_state.personal_ranking = []
+        st.rerun()
 
 def run_auth(st_supabase):
     """

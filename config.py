@@ -5,7 +5,7 @@ from st_supabase_connection import SupabaseConnection
 # ── Constants ──────────────────────────────────────────────────────────────────
 FAVICON_FILENAME    = "favicon.png"
 HEADER_LOGO_FILENAME = "logo.png"
-DEBUG_MODE = True  # Set to True to skip login during development
+DEBUG_MODE = False  # Set to True to skip login during development
 
 # ── Page config (must be first Streamlit call in app.py) ──────────────────────
 def init_page():
