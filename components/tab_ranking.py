@@ -46,7 +46,12 @@ def render(df_all, st_supabase):
 
     # Initialise ranking state on first visit to this tab
     if "personal_ranking" not in st.session_state:
-        st.session_state.personal_ranking = []
+        previously_ranked = (
+            df_all[df_all["personal_rank"] > 0]
+            .sort_values("personal_rank")["Name"]
+            .tolist()
+        )
+        st.session_state.personal_ranking = previously_ranked
         st.session_state.ranking_changed  = False
 
     current = st.session_state.personal_ranking
