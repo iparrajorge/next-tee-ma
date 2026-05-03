@@ -77,6 +77,8 @@ def render_sidebar(st_supabase):
         if lat:
             user_lat, user_lon = lat, lon
             st.sidebar.success(f"📍 {full_name.split(',')[0]}")
+        else:
+            st.sidebar.warning("📍 Location not found — defaulting to Boston.")
 
     # ── Priority sliders ───────────────────────────────────────────────────────
     st.sidebar.markdown("---")
