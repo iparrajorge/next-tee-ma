@@ -15,7 +15,7 @@ def get_coordinates(address_string):
     return None, None, None
 
 
-def render_sidebar():
+def render_sidebar(st_supabase):
     """
     Draw all sidebar widgets and write the user's choices into st.session_state
     so that data.py and the tab components can read them without needing
@@ -31,6 +31,30 @@ def render_sidebar():
         d_w           – float  distance weight
     """
     st.sidebar.header("User Preferences")
+
+    # ── First-visit sidebar hint ───────────────────────────────────────────
+    if not st.session_state.get("seen_sidebar_hint", False):
+        user_id = st.session_state.user_id
+        result = st_supabase.table("user_flags") \
+            .select("seen_sidebar_hint") \
+            .eq("user_id", user_id) \
+            .execute()
+
+        seen = result.data[0]["seen_sidebar_hint"] if result.data else False
+        st.session_state.seen_sidebar_hint = seen
+
+        if not seen:
+            st.sidebar.info(
+                "👋 **Start here!** Set your location and adjust the sliders "
+                "to match what matters most to you. Your results update instantly."
+            )
+            if st.sidebar.button("Got it ✓"):
+                st_supabase.table("user_flags").upsert({
+                    "user_id": user_id,
+                    "seen_sidebar_hint": True,
+                }, on_conflict="user_id").execute()
+                st.session_state.seen_sidebar_hint = True
+                st.rerun()
 
     # ── Course filters ─────────────────────────────────────────────────────────
     hole_choice = st.sidebar.radio(

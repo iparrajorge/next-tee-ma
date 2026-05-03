@@ -12,6 +12,11 @@ from auth import run_auth, show_logout_button
 run_auth(st_supabase)
 show_logout_button(st_supabase)
 
+# ── 3b. Onboarding                          
+from onboarding import check_onboarding, render_onboarding
+if check_onboarding(st_supabase):
+    render_onboarding(st_supabase)
+
 # ── 4. App header (only reached when authenticated) ───────────────────────────
 st.subheader(
     "A Massachusetts Golf Course Recommender",
@@ -33,7 +38,7 @@ This app uses a user-weighted multi-objective optimization algorithm to rank pub
 # ── 5. Sidebar — writes hole_choice, explore_choice, user_lat/lon,
 #                p_w, r_w, d_w into st.session_state ─────────────────────────
 from sidebar import render_sidebar
-render_sidebar()
+render_sidebar(st_supabase)
 
 # ── 6. Data — load, filter, and score using the values now in session_state ───
 from data import load_data, filter_data, calculate_scores
@@ -56,7 +61,7 @@ with tab1:
     tab_table.render(results, st_supabase)
 
 with tab2:
-    tab_map.render(results)
+    tab_map.render(results, st_supabase)
 
 with tab3:
     tab_ranking.render(df_all, st_supabase)
