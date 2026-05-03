@@ -3,6 +3,30 @@ import streamlit as st
 
 def render(results, st_supabase):
     """Render the 📊 Ranked Table tab."""
+    # ── First-visit hint ───────────────────────────────────────────────────────
+    if not st.session_state.get("seen_table_hint", False):
+        user_id = st.session_state.user_id
+        result = st_supabase.table("user_flags") \
+            .select("seen_table_hint") \
+            .eq("user_id", user_id) \
+            .execute()
+
+        seen = result.data[0]["seen_table_hint"] if result.data else False
+        st.session_state.seen_table_hint = seen
+
+        if not seen:
+            st.info(
+                "📊 **Ranked Table** — Courses are scored based on your sidebar preferences. "
+                "Check the **Played?** box for any course you've played, then hit **Sync** to save."
+            )
+            if st.button("Got it ✓", key="dismiss_table_hint"):
+                st_supabase.table("user_flags").upsert({
+                    "user_id": user_id,
+                    "seen_table_hint": True,
+                }, on_conflict="user_id").execute()
+                st.session_state.seen_table_hint = True
+                st.rerun()
+
 
     if results.empty:
         st.warning("No courses match those filters. Try opening up your options!")

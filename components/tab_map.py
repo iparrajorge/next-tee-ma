@@ -3,8 +3,33 @@ import pydeck as pdk
 import streamlit as st
 
 
-def render(results):
+def render(results, st_supabase):
     """Render the 🗺️ Map View tab."""
+
+    # ── First-visit hint ───────────────────────────────────────────────────────
+    if not st.session_state.get("seen_map_hint", False):
+        user_id = st.session_state.user_id
+        result = st_supabase.table("user_flags") \
+            .select("seen_map_hint") \
+            .eq("user_id", user_id) \
+            .execute()
+
+        seen = result.data[0]["seen_map_hint"] if result.data else False
+        st.session_state.seen_map_hint = seen
+
+        if not seen:
+            st.info(
+                "🗺️ **Map View** — Green dots are your top 5 courses, grey dots are the rest. "
+                "The red dot is your location. Hover over any dot for details."
+            )
+            if st.button("Got it ✓", key="dismiss_map_hint"):
+                st_supabase.table("user_flags").upsert({
+                    "user_id": user_id,
+                    "seen_map_hint": True,
+                }, on_conflict="user_id").execute()
+                st.session_state.seen_map_hint = True
+                st.rerun()
+
 
     if results.empty:
         st.warning("No courses match those filters.")

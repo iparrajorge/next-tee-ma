@@ -35,6 +35,31 @@ def _btp_insert_position(new_name, current_ranking, df_ref):
 def render(df_all, st_supabase):
     """Render the 🏅 Personal Ranking tab."""
 
+    # ── First-visit hint ───────────────────────────────────────────────────────
+    if not st.session_state.get("seen_ranking_hint", False):
+        user_id = st.session_state.user_id
+        result = st_supabase.table("user_flags") \
+            .select("seen_ranking_hint") \
+            .eq("user_id", user_id) \
+            .execute()
+
+        seen = result.data[0]["seen_ranking_hint"] if result.data else False
+        st.session_state.seen_ranking_hint = seen
+
+        if not seen:
+            st.info(
+                "🏅 **Personal Ranking** — Drag and drop courses into your own personal order. "
+                "Forget price and distance — if a friend offered you two courses tomorrow, which would you pick? "
+                "Hit **Sync** to save your ranking."
+            )
+            if st.button("Got it ✓", key="dismiss_ranking_hint"):
+                st_supabase.table("user_flags").upsert({
+                    "user_id": user_id,
+                    "seen_ranking_hint": True,
+                }, on_conflict="user_id").execute()
+                st.session_state.seen_ranking_hint = True
+                st.rerun()
+
     played_courses = df_all[df_all["played"] == True]["Name"].tolist()
 
     if not played_courses:
