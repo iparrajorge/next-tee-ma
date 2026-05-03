@@ -81,11 +81,20 @@ def render(results, st_supabase):
 
     if st.button("Sync My Progress ☁️"):
         user_id = st.session_state.user_id
+        
+        # Only sync rows where played status changed from the original
+        original = results.set_index("Course_ID")["played"]
         for _, row in edited_df.iterrows():
-            st_supabase.table("user_courses").upsert({
-                "user_id":   user_id,
-                "course_id": row["Course_ID"],
-                "played":    bool(row["played"]),
-            }, on_conflict="user_id,course_id").execute()
+            course_id = row["Course_ID"]
+            new_played = bool(row["played"])
+            old_played = bool(original.get(course_id, False))
+            
+            if new_played != old_played:
+                st_supabase.table("user_courses").upsert({
+                    "user_id":   user_id,
+                    "course_id": course_id,
+                    "played":    new_played,
+                }, on_conflict="user_id,course_id").execute()
+        
         st.success("Synced to the Cloud!")
         st.rerun()
