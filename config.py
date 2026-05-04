@@ -18,7 +18,6 @@ def init_page():
         st.image(HEADER_LOGO_FILENAME, width=450)
 
 # ── Connections (cached so they are only created once per session) ─────────────
-@st.cache_resource
 def get_supabase_connection():
     return st.connection(
         "supabase",
