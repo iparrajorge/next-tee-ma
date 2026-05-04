@@ -81,9 +81,9 @@ def show_auth_ui(st_supabase):
                     st.rerun()
                 else:
                     st.success("Account created! Please log in.")
-            except Exception:
-                st.error("Account could not be created. (Check if email is already in use)")
-
+            except Exception as e:
+                st.error(f"Account could not be created: {e}")
+                
     st.stop()
 
 def show_logout_button(st_supabase):
