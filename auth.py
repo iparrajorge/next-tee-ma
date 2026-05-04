@@ -15,6 +15,7 @@ def init_session():
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
         st.session_state.user_id = None
+        st.session_state.resetting_password = False
 
 
 def restore_session(st_supabase):
@@ -22,8 +23,12 @@ def restore_session(st_supabase):
     if not st.session_state.authenticated:
         existing = st_supabase.auth.get_session()
         if existing:
-            st.session_state.authenticated = True
-            st.session_state.user_id = existing.user.id
+            # A password recovery session has a specific type
+            if getattr(existing, "type", None) == "recovery":
+                st.session_state.resetting_password = True
+            else:
+                st.session_state.authenticated = True
+                st.session_state.user_id = existing.user.id
 
 
 def apply_debug_mode():
@@ -31,6 +36,21 @@ def apply_debug_mode():
     if DEBUG_MODE:
         st.session_state.authenticated = True
         st.session_state.user_id = "00000000-0000-0000-0000-000000000000"
+
+
+def show_reset_password_ui(st_supabase):
+    """Render the new-password form after user clicks the reset link in their email."""
+    st.markdown("## Reset Your Password")
+    new_password = st.text_input("Enter your new password", type="password")
+    if st.button("Update Password"):
+        try:
+            st_supabase.auth.update_user({"password": new_password})
+            st.success("Password updated! Please log in.")
+            st.session_state.resetting_password = False
+            st.rerun()
+        except Exception as e:
+            st.error(f"Could not update password: {e}")
+    st.stop()
 
 
 def show_auth_ui(st_supabase):
@@ -60,10 +80,20 @@ def show_auth_ui(st_supabase):
                 if response:
                     st.session_state.authenticated = True
                     st.session_state.user_id = response.user.id
-                    _log_event(st_supabase, "login", response.user.id)  # ← add this
+                    _log_event(st_supabase, "login", response.user.id)
                     st.rerun()
             except Exception:
                 st.error("Invalid login credentials.")
+
+        # ── Forgot password ────────────────────────────────────────────────
+        with st.expander("Forgot your password?"):
+            reset_email = st.text_input("Enter your email", key="reset_email")
+            if st.button("Send Reset Link"):
+                try:
+                    st_supabase.auth.reset_password_for_email(reset_email)
+                    st.success("Check your inbox for a reset link!")
+                except Exception as e:
+                    st.error(f"Could not send reset email: {e}")
 
     with tab2:
         new_email    = st.text_input("Email",    key="signup_email")
@@ -76,7 +106,7 @@ def show_auth_ui(st_supabase):
                 if response.session:
                     st.session_state.authenticated = True
                     st.session_state.user_id = response.user.id
-                    _log_event(st_supabase, "signup", response.user.id)  # ← add this
+                    _log_event(st_supabase, "signup", response.user.id)
                     st.success("Welcome aboard!")
                     st.rerun()
                 else:
@@ -105,11 +135,15 @@ def run_auth(st_supabase):
       1. Ensure session keys exist.
       2. Try to restore an existing Supabase session.
       3. Honour DEBUG_MODE bypass.
-      4. Show auth UI (and halt) if still not authenticated.
+      4. Show reset UI if user came from a password reset link.
+      5. Show auth UI (and halt) if still not authenticated.
     """
     init_session()
     restore_session(st_supabase)
     apply_debug_mode()
+
+    if st.session_state.get("resetting_password"):
+        show_reset_password_ui(st_supabase)
 
     if not st.session_state.authenticated:
         show_auth_ui(st_supabase)
