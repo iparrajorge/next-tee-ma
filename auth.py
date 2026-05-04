@@ -95,6 +95,7 @@ def show_logout_button(st_supabase):
         st.session_state.user_id = None
         st.session_state.personal_ranking = []
         st.rerun()
+    st.sidebar.markdown("Questions? [nextteema@proton.me](mailto:nextteema@proton.me)")
 
 def run_auth(st_supabase):
     """
