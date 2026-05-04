@@ -82,8 +82,11 @@ def show_auth_ui(st_supabase):
                 else:
                     st.success("Account created! Please log in.")
             except Exception as e:
-                st.error(f"Account could not be created: {e}")
-                
+                if "Password should be at least" in str(e):
+                    st.error("Password must be at least 6 characters.")
+                else:
+                    st.error(f"Account could not be created: {e}")
+
     st.stop()
 
 def show_logout_button(st_supabase):
